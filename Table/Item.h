@@ -14,11 +14,14 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *subtitle;
 @property (nonatomic, assign) CGFloat price;
-@property (nonatomic, assign) NSDate *createdAt;
+@property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) NSDate *available;
+@property (nonatomic, strong) NSURL* imageUrl;
 
 - (id)initWithJSONObject:(NSDictionary *)JSONObject;
 
 - (NSDictionary *)JSONObject;
+
+- (void) downloadImage:(void (^)(UIImage* image))onSuccess failure:(void (^)())onFailure;
 
 @end

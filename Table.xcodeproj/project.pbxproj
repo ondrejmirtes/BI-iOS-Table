@@ -35,6 +35,7 @@
 		179DAD7E16382F4400B997CE /* ToastService.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DAD7D16382F4400B997CE /* ToastService.m */; };
 		179DAD891638523400B997CE /* NSNull+FIT.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DAD881638523400B997CE /* NSNull+FIT.m */; };
 		179DAD8C16387C3400B997CE /* NSString+FIT.m in Sources */ = {isa = PBXBuildFile; fileRef = 179DAD8B16387C3400B997CE /* NSString+FIT.m */; };
+		79050BDE164ACAB80068B676 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79050BDD164ACAB80068B676 /* NSDate+TimeAgo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,8 @@
 		179DAD881638523400B997CE /* NSNull+FIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+FIT.m"; sourceTree = "<group>"; };
 		179DAD8A16387C3400B997CE /* NSString+FIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FIT.h"; sourceTree = "<group>"; };
 		179DAD8B16387C3400B997CE /* NSString+FIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FIT.m"; sourceTree = "<group>"; };
+		79050BDC164ACAB80068B676 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+TimeAgo.h"; path = "NSDate-TimeAgo/NSDate+TimeAgo.h"; sourceTree = SOURCE_ROOT; };
+		79050BDD164ACAB80068B676 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+TimeAgo.m"; path = "NSDate-TimeAgo/NSDate+TimeAgo.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				173D4FC216380A59003795D2 /* Extra */,
 				179DAD871638523400B997CE /* NSNull+FIT.h */,
 				179DAD881638523400B997CE /* NSNull+FIT.m */,
+				79050BDC164ACAB80068B676 /* NSDate+TimeAgo.h */,
+				79050BDD164ACAB80068B676 /* NSDate+TimeAgo.m */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				179DAD7E16382F4400B997CE /* ToastService.m in Sources */,
 				179DAD891638523400B997CE /* NSNull+FIT.m in Sources */,
 				179DAD8C16387C3400B997CE /* NSString+FIT.m in Sources */,
+				79050BDE164ACAB80068B676 /* NSDate+TimeAgo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

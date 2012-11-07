@@ -8,7 +8,13 @@
 
 #import "Item.h"
 
+@interface Item()
+	@property (nonatomic, strong) UIImage* image;
+@end
+
 @implementation Item
+
+@synthesize image = _image;
 
 - (id)initWithJSONObject:(NSDictionary *)JSONObject
 {
@@ -38,6 +44,11 @@
             formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
             _createdAt = [formatter dateFromString:createdAtString];
         }
+		
+		NSString* imageUrlStr = JSONObject[@"imageurl"];
+		if ((NSNull *)imageUrlStr != [NSNull null]) {
+			_imageUrl = [NSURL URLWithString:imageUrlStr];
+		}
     }
     
     return self;
@@ -61,6 +72,27 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"Item: %@, %@", _title, _subtitle];
+}
+
+- (void) downloadImage:(void (^)(UIImage* image))onSuccess failure:(void (^)())onFailure
+{
+	if (self.image) {
+		onSuccess(self.image);
+		return;
+	}
+	if (_imageUrl) {
+		dispatch_async(dispatch_get_global_queue(0,0), ^{
+			NSData * data = [[NSData alloc] initWithContentsOfURL:_imageUrl];
+			if (data == nil) onFailure();
+			DEFINE_BLOCK_SELF;
+			dispatch_async(dispatch_get_main_queue(), ^{
+				blockSelf.image = [UIImage imageWithData: data];
+				onSuccess(blockSelf.image);
+			});
+		});
+	} else {
+		onFailure();
+	}
 }
 
 @end

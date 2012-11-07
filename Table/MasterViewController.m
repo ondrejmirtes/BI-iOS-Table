@@ -11,6 +11,7 @@
 #import "NetworkService.h"
 #import "Item.h"
 #import "ToastService.h"
+#import "NSDate+TimeAgo.h"
 
 @interface MasterViewController ()
 
@@ -154,42 +155,43 @@
     return count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(320 - 180 -4, 2, 80, 20)];
-//        label.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
-//        label.textAlignment = UITextAlignmentRight;
-//        label.tag = 1;
-//        label.adjustsFontSizeToFitWidth = YES;
-//        [cell.contentView addSubview:label];
-//        
-//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-//        cell.accessoryView = [[UISwitch alloc] init];
-    }
-    
-    if (indexPath.row == _itemArray.count) {
-        cell.textLabel.text = @"insert new";
-        return cell;
-    }
+	
+	if (indexPath.row == _itemArray.count) {
+		cell.textLabel.text = @"Add item...";
+		return cell;
+	}
     
     Item *item = _itemArray[indexPath.row];
-    cell.textLabel.text = item.title;
-    cell.detailTextLabel.text = item.subtitle;
-//    cell.imageView.image = [UIImage imageNamed:@"kitty"];
+	UILabel* textLabel = (UILabel*) [cell viewWithTag:3];
+    textLabel.text = item.title;
+	
+	UILabel* detailTextLabel = (UILabel*) [cell viewWithTag:4];
+	detailTextLabel.text = [NSString stringWithFormat:@"%@, %.2f", item.subtitle, item.price];
+	
+	if (item.createdAt) {
+		UILabel* labelAgo = (UILabel*) [cell viewWithTag:1];
+		labelAgo.text = [item.createdAt timeAgo];
+	}
+
+	UIImageView* imageView = (UIImageView*) [cell viewWithTag:2];
+	imageView.image = [UIImage imageNamed:@"kitty"];
+	
+	[item downloadImage:^(UIImage* image){
+		imageView.image = image;
+	} failure:^{
+		imageView.image = [UIImage imageNamed:@"kitty"];
+	}];
     
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    formatter.dateStyle = NSDateFormatterNoStyle;
-//    formatter.timeStyle = NSDateFormatterMediumStyle;
-//    NSString *timeString = [formatter stringFromDate:_itemArray[indexPath.row]];
-//    UILabel *dateLabel = (UILabel *)[cell.contentView viewWithTag:1];
-//    dateLabel.text = item.;
-    
-    // Configure the cell...
+    // Configure the cell...*/
     
     return cell;
 }
