@@ -10,6 +10,7 @@
 
 @interface Item : NSObject
 
+@property (nonatomic, strong) NSNumber* identifier;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *subtitle;
 @property (nonatomic, assign) CGFloat price;

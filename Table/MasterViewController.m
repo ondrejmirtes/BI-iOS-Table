@@ -218,10 +218,15 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         
-        [_itemArray removeObjectAtIndex:indexPath.row];        
-        [self.tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView endUpdates];
+		Item* item = [_itemArray objectAtIndex:indexPath.row];
+		[[NetworkService sharedService] deleteItemWithId:[item.identifier intValue] success:^{
+			[_itemArray removeObjectAtIndex:indexPath.row];
+			[self.tableView beginUpdates];
+			[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[self.tableView endUpdates];
+		} failure:^{
+			[[ToastService sharedService] toastErrorWithTitle:@"Error" subtitle:@"Could not delete the item."];
+		}];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

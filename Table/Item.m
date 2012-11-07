@@ -16,6 +16,7 @@
     if (self) {
         TRC_OBJ(JSONObject);
         
+		_identifier = [NSNumber numberWithInt:[JSONObject[@"id"] intValue]];
         _title = [JSONObject[@"title"] stringValue];
         _subtitle = [JSONObject[@"subtitle"] stringValue];
 //        NSNumber *number = JSONObject[@"price"];
@@ -47,6 +48,7 @@
      */
     
     return @{
+	@"item[id]" : _identifier ? _identifier : [NSNull null],
     @"item[title]" : _title? _title : [NSNull null],
     @"item[subtitle]" : _subtitle? _subtitle : [NSNull null],
     @"item[description]" : [NSNull null],

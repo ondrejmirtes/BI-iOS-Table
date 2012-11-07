@@ -60,6 +60,22 @@
              }];
 }
 
+- (void)deleteJSONAtPath:(NSString *)aPath
+              success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))onSuccess
+              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))onFailure
+{
+    [_client deletePath:aPath
+          parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 TRC_LOG(@"%d, DELETE %@", operation.response.statusCode, operation.request.URL);
+                 onSuccess(operation, responseObject);
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 TRC_LOG(@"%d, DELETE %@", operation.response.statusCode, operation.request.URL);
+                 [[ToastService sharedService] toastErrorWithHTTPStatusCode:operation.response.statusCode];
+                 onFailure(operation, error);
+             }];
+}
+
 - (void)postJSONObject:(id)JSONObject
                 toPath:(NSString *)aPath
                success:(void (^)(AFHTTPRequestOperation *, id))onSuccess
@@ -120,6 +136,16 @@
                          onFailure();
                      }
                  }];
+}
+
+- (void)deleteItemWithId:(NSUInteger)anId success:(void (^)())onSuccess failure:(void (^)())onFailure
+{
+    [self deleteJSONAtPath:[NSString stringWithFormat:@"items/%d.json", anId]
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    onSuccess();
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    onFailure();
+                }];
 }
 
 - (void)put

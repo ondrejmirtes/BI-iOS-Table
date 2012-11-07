@@ -27,6 +27,7 @@
 - (void)getItemWithId:(NSUInteger)anId;
 
 - (void)createItem:(Item *)item success:(void (^)(Item *item))onSuccess failure:(void (^)())onFailure;
+- (void)deleteItemWithId:(NSUInteger)anId success:(void (^)())onSuccess failure:(void (^)())onFailure;
 
 - (void)put;
 
