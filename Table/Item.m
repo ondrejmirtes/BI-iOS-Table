@@ -31,11 +31,13 @@
             formatter.dateFormat = @"yyyy-MM-dd";
             _available = [formatter dateFromString:dateString];
         }
-        
-        /*
-         TODO: dodelat dalsi atributy
-         "2012-10-24T14:03:27Z" timestamp ma format string "yyyy-MM-dd'T'HH:mm:ssZ"
-         */
+		
+		NSString *createdAtString = JSONObject[@"created_at"];
+        if ((NSNull *)createdAtString != [NSNull null]) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZ";
+            _createdAt = [formatter dateFromString:createdAtString];
+        }
     }
     
     return self;

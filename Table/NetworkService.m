@@ -103,7 +103,11 @@
                     }
                     
                     if (onSuccess) {
-                        onSuccess(itemArray);
+                        onSuccess([[itemArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+							NSDate *first = [(Item*)a createdAt];
+							NSDate *second = [(Item*)b createdAt];
+							return [second compare:first];
+						}] mutableCopy]);
                     }
                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                     if (onFailure) {
