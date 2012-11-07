@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) NSDate *available;
 @property (nonatomic, strong) NSURL* imageUrl;
+@property (nonatomic, strong) NSString* description;
 
 - (id)initWithJSONObject:(NSDictionary *)JSONObject;
 

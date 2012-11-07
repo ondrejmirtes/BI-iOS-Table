@@ -30,6 +30,7 @@
 //            _price = number.floatValue;
 //        }
         _price = [JSONObject[@"price"] floatValue];
+		_description = JSONObject[@"description"];
         
         NSString *dateString = JSONObject[@"available"];
         if ((NSNull *)dateString != [NSNull null]) {
@@ -64,14 +65,9 @@
 	@"item[id]" : _identifier ? _identifier : [NSNull null],
     @"item[title]" : _title? _title : [NSNull null],
     @"item[subtitle]" : _subtitle? _subtitle : [NSNull null],
-    @"item[description]" : [NSNull null],
+    @"item[description]" : _description ? _description : [NSNull null],
     @"item[price]" : @(3.1415)
     };
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"Item: %@, %@", _title, _subtitle];
 }
 
 - (void) downloadImage:(void (^)(UIImage* image))onSuccess failure:(void (^)())onFailure

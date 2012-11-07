@@ -14,9 +14,11 @@
 @property (nonatomic, strong) Item *item;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *imageCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *subtitleCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *descriptionCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *priceCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *availableCell;
+@property (weak, nonatomic) IBOutlet UITextField *titleField;
+@property (weak, nonatomic) IBOutlet UITextField *subtitleField;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UITextField *priceField;
 
 @property (nonatomic, strong) void (^onSave)(Item *item);
 
